@@ -1,0 +1,5 @@
+calendrier commence toujours par le premier jour de la semaine . (done)
+on ne peut pas choisir un moment dans le passé.  (done)
+le samedi et le dimanche sont exclues. (done)
+les heures du jour commence de 8 heures du matin jusqu'à 18 heures. (done)
+élimination des jours fériés.  (not yet)

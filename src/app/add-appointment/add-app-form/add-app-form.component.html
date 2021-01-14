@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Appointment start at {{data.startDate | date :'dd-MM-yyyy hh:mm a'}}</h1>
+<div mat-dialog-content>
+  <p>What's your Name ?</p>
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="data.name">
+  </mat-form-field>
+  <p>What's your Phone Number ?</p>
+  <mat-form-field *ngIf="data.name">
+    <mat-label>Phone Number</mat-label>
+    <input matInput type="number" [(ngModel)]="data.number">
+  </mat-form-field>
+  <p>What's your Email Address ?</p>
+  <mat-form-field *ngIf="data.number">
+    <mat-label>Email Address</mat-label>
+    <input matInput type="email" [(ngModel)]="data.email">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary" [disabled]="!data.number || !data.email" [mat-dialog-close]="data">Ok</button>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+</div>
