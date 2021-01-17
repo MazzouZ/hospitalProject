@@ -17,6 +17,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButton, MatButtonModule} from '@angular/material/button';
 import { AgmCoreModule } from '@agm/core';
 import { MapComponent } from './map/map.component';
+import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { MapComponent } from './map/map.component';
     MapComponent,
   ],
   imports: [
+    SweetAlert2Module.forRoot(),
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
