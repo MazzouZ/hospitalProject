@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CalendarEvent, CalendarView } from "angular-calendar";
-import { getDay } from "date-fns";
+import {getDay, parseISO} from 'date-fns';
 import {AppointmentService} from '../services/appointment.service';
 import {MatDialog} from '@angular/material/dialog';
 import {AddAppFormComponent} from './add-app-form/add-app-form.component';
-
+import Swal from 'sweetalert2';
+import {Router} from '@angular/router';
+import {endOfMinute, startOfMinute} from 'date-fns';
+import {colors} from '../consts/consts';
 @Component({
   selector: 'app-add-appointment',
   templateUrl: './add-appointment.component.html',
@@ -19,7 +22,9 @@ export class AddAppointmentComponent implements OnInit {
   clickedColumn: number;
   today: Number;
 
-  constructor(private appointmentService:AppointmentService,public dialog: MatDialog) { }
+  constructor(private appointmentService:AppointmentService,
+              public dialog: MatDialog,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.today=getDay(new Date());
@@ -27,7 +32,19 @@ export class AddAppointmentComponent implements OnInit {
   }
 
   getAppointments(){
-    this.events = this.appointmentService.getAppointments();
+    this.appointmentService.getAppointments().subscribe((data:any) => {
+      let result = data._embedded.appointments;
+      result.forEach((appointment: any) => {
+          this.events =[...this.events,{
+            title: "Busy",
+            start: startOfMinute(parseISO(appointment.startDate)),
+            end: endOfMinute(parseISO(appointment.endDate)),
+            color: colors.red
+          }];
+      });
+    },error => {
+      console.log(error);
+    });
   }
   dateSelected(date) {
     let endDate=date.getTime() + 30 * 60000;
@@ -39,8 +56,16 @@ export class AddAppointmentComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(result => {
         if (result.email && result.number){
-          this.appointmentService.addAppointment(result);
-          this.events = this.appointmentService.getAppointments();
+          this.appointmentService.addAppointment(result).subscribe((data:any) => {
+            this.getAppointments();
+            Swal.fire("Done...", "You Appointment is succesfully submitted!", "success").then(
+              value => {
+                this.router.navigate(['/']);
+              }
+            );
+          },error => {
+            console.log(error);
+          });
         }
       });
     }

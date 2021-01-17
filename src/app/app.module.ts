@@ -15,6 +15,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButton, MatButtonModule} from '@angular/material/button';
+import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import {MatButton, MatButtonModule} from '@angular/material/button';
     AddAppFormComponent,
   ],
   imports: [
+    SweetAlert2Module.forRoot(),
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
