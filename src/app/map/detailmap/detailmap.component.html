@@ -1,0 +1,23 @@
+<button style="float: right;margin-top: 25px;margin-bottom: 25px;" (click)="redirectAjout(item)" class="btn btn-primary">Ajouter un rendez-vous</button>
+<table class="table table-bordered" style="width: 100%;">
+    <thead>
+      <tr>
+        <th scope="col">code</th>
+        <th scope="col">categorie</th>
+        <th scope="col">cs</th>
+        <th scope="col">nom</th>
+        <th scope="col">province</th>
+        <th scope="col">region</th>
+      </tr>
+    </thead>
+    <tbody>  
+      <tr>
+        <td>{{item.code}}</td>
+        <td>{{item.categorie}}</td>
+        <td>{{item.cs}}</td>
+        <td>{{item.nom}}</td>
+        <td>{{item.province}}</td>
+        <td>{{item.region}}</td>
+      </tr>
+    </tbody>
+  </table>

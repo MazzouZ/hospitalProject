@@ -9,12 +9,12 @@
          >
           
           <agm-marker 
-              *ngFor="let marker of markers" 
-              [latitude]="marker.lat" 
-                [longitude]="marker.lng"
+              *ngFor="let marker of data" 
+              [latitude]="marker.latitude" 
+                [longitude]="marker.longitude"
                 >    
                     <agm-info-window #infoWindow> 
-                        <a (click)="redrect()">{{ marker.label }}</a>
+                        <a (click)="redrect(marker)">{{ marker.nom }}</a>
                   </agm-info-window>
           </agm-marker>
           

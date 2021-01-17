@@ -1,5 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CrudService } from '../services/crud.service';
+import { SharingService } from '../services/sharing.service';
+
+export interface Etablissement{
+   code:String 
+	 nom:String
+	 categorie:String
+	 reseau:String
+	 cs:String
+	 province:String
+   region:String
+   objectId:Number;
+	 longitude:Number;
+	 latitude:Number;
+  
+}
 
 @Component({
   selector: 'app-map',
@@ -7,34 +23,34 @@ import { Router } from '@angular/router';
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit {
-  lat = 22.4064172;
-  long = 69.0750171;
+  lat = 31.7945;
+  long = -7.0849;
   zoom=7;
-  
-  markers = [
-        {
-            lat: 21.1594627,
-            lng: 72.6822083,
-            label: 'Surat'
-        },
-        {
-            lat: 23.0204978,
-            lng: 72.4396548,
-            label: 'Ahmedabad'
-        },
-        {
-            lat: 22.2736308,
-            lng: 70.7512555,
-            label: 'Rajkot'
-        }
-    ];
-    constructor(private router:Router) { }
+   
+  data:any[];
+
+  constructor(private crudService:CrudService,private router:Router,private sharingService:SharingService) { }
 
   ngOnInit(): void {
+    setTimeout(()=>{
+      this.getEtbl();
+    },500);
   }
 
+  public getEtbl(){
+    this.crudService.getAll('etablissements').subscribe(
+      (element)=>{
+        this.data=[];
+        // @ts-ignore
+        this.data=element._embedded.etablissements;
+      },error=>{
+        console.log(error);
+      }
+    );
+  }
 
-  public redrect(){
-      this.router.navigate(['mp']);
+  public redrect(objet){
+    this.sharingService.sharingValue=objet;
+    this.router.navigate(['Detailmp']);
     }
 }

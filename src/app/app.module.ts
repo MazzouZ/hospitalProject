@@ -19,6 +19,7 @@ import { AgmCoreModule } from '@agm/core';
 import { MapComponent } from './map/map.component';
 import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2';
 import {HttpClientModule} from '@angular/common/http';
+import { DetailmapComponent } from './map/detailmap/detailmap.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import {HttpClientModule} from '@angular/common/http';
     AddAppointmentComponent,
     AddAppFormComponent,
     MapComponent,
+    DetailmapComponent,
   ],
   imports: [
     SweetAlert2Module.forRoot(),
