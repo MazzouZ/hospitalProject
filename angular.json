@@ -126,5 +126,8 @@
       }
     }
   },
-  "defaultProject": "hospitalProject"
+  "defaultProject": "hospitalProject",
+  "cli": {
+    "analytics": false
+  }
 }

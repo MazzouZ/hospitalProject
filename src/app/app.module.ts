@@ -15,12 +15,15 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButton, MatButtonModule} from '@angular/material/button';
+import { AgmCoreModule } from '@agm/core';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddAppointmentComponent,
     AddAppFormComponent,
+    MapComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,9 +39,14 @@ import {MatButton, MatButtonModule} from '@angular/material/button';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
-
+    MatButtonModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyD6m8NBTg0QAzCJX8mX5f9TyG9kb2XJiDI',
+      libraries: ['places']
+    })
   ],
+
+  
   providers: [AddAppFormComponent],
   bootstrap: [AppComponent],
   exports: [AddAppointmentComponent]
