@@ -19,7 +19,7 @@ export class AuthComponent implements OnInit {
 
   public save(){
     if(this.username == "admin" && this.password == "admin")
-       this.router.navigate(["mp"]);
+       this.router.navigate(["/"]);
     else
       alert("username ou mode de passe incorrecte");
 
