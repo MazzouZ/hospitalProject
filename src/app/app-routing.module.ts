@@ -7,7 +7,7 @@ import { MapComponent } from './map/map.component';
 
 const routes: Routes = [
   {path: 'add-appointment', component: AddAppointmentComponent},
-  {path: 'mp', component: MapComponent},
+  {path: '', component: MapComponent},
   {path: 'Detailmp', component: DetailmapComponent},
   {path: 'Login',component : AuthComponent},
 ];
