@@ -20,6 +20,7 @@ import { MapComponent } from './map/map.component';
 import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2';
 import {HttpClientModule} from '@angular/common/http';
 import { DetailmapComponent } from './map/detailmap/detailmap.component';
+import { AuthComponent } from './Auth/auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { DetailmapComponent } from './map/detailmap/detailmap.component';
     AddAppFormComponent,
     MapComponent,
     DetailmapComponent,
+    AuthComponent,
   ],
   imports: [
     SweetAlert2Module.forRoot(),
