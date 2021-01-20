@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {CalendarEvent} from 'angular-calendar';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -16,5 +16,9 @@ export class AppointmentService {
   }
   addAppointment(appointment){
      return this.http.post(this.url, appointment);
+  }
+  addEtabToApp(etab,appointmentLink){
+    return this.http.put(etab._links.etablissement.href,appointmentLink,
+      {headers: new HttpHeaders({'Content-Type': 'text/uri-list'})})
   }
 }

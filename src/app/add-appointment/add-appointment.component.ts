@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import {Router} from '@angular/router';
 import {endOfMinute, startOfMinute} from 'date-fns';
 import {colors} from '../consts/consts';
+import {SharingService} from '../services/sharing.service';
 @Component({
   selector: 'app-add-appointment',
   templateUrl: './add-appointment.component.html',
@@ -21,14 +22,16 @@ export class AddAppointmentComponent implements OnInit {
   clickedDate: Date;
   clickedColumn: number;
   today: Number;
-
+  etablisment=this.sharingService.sharingValue;
   constructor(private appointmentService:AppointmentService,
               public dialog: MatDialog,
-              private router: Router) { }
+              private router: Router,
+              private sharingService: SharingService) { }
 
   ngOnInit(): void {
     this.today=getDay(new Date());
     this.getAppointments();
+
   }
 
   getAppointments(){
@@ -57,12 +60,17 @@ export class AddAppointmentComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         if (result.email && result.number){
           this.appointmentService.addAppointment(result).subscribe((data:any) => {
-            this.getAppointments();
-            Swal.fire("Done...", "You Appointment is succesfully submitted!", "success").then(
-              value => {
-                this.router.navigate(['/']);
-              }
-            );
+            this.appointmentService.addEtabToApp(this.etablisment,data._links.self.href).subscribe(value => {
+              this.getAppointments();
+              Swal.fire("Done...", "You Appointment is succesfully submitted!", "success").then(
+                value => {
+                  this.router.navigate(['/']);
+                }
+              );
+            },error => {
+              console.log(error);
+            });
+
           },error => {
             console.log(error);
           });
