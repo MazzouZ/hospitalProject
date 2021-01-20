@@ -35,7 +35,7 @@ export class AddAppointmentComponent implements OnInit {
   }
 
   getAppointments(){
-    this.appointmentService.getAppointments().subscribe((data:any) => {
+    this.appointmentService.getAppointmentsOfEtab(this.etablisment).subscribe((data:any) => {
       let result = data._embedded.appointments;
       result.forEach((appointment: any) => {
           this.events =[...this.events,{
@@ -60,7 +60,7 @@ export class AddAppointmentComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         if (result.email && result.number){
           this.appointmentService.addAppointment(result).subscribe((data:any) => {
-            this.appointmentService.addEtabToApp(this.etablisment,data._links.self.href).subscribe(value => {
+            this.appointmentService.addEtabToApp(data,this.etablisment._links.self.href).subscribe(value => {
               this.getAppointments();
               Swal.fire("Done...", "You Appointment is succesfully submitted!", "success").then(
                 value => {
@@ -70,7 +70,6 @@ export class AddAppointmentComponent implements OnInit {
             },error => {
               console.log(error);
             });
-
           },error => {
             console.log(error);
           });

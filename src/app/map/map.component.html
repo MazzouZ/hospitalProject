@@ -1,5 +1,5 @@
-<div class="container">
-  
+
+
     <h1>List des etablissement</h1>
     <h2>Filter by :</h2>
     <button mat-raised-button (click)="clickCode()" color="primary" style="margin-bottom: 20px; margin-right: 13px;">Code</button>
@@ -19,24 +19,23 @@
           <input matInput (keyup)="applyFilter3($event)" placeholder="Entrer une categorie" style="width: 100%;">
         </mat-form-field>
       </form>
-      <agm-map 
-         [latitude]='lat' 
+      <agm-map
+         [latitude]='lat'
          [longitude]='long'
          [zoom]='zoom'
          >
          <div *ngFor="let marker of data">
-         
-          <agm-marker 
-               
-              [latitude]="marker.latitude" 
+
+          <agm-marker
+
+              [latitude]="marker.latitude"
                 [longitude]="marker.longitude"
-                >    
-                    <agm-info-window #infoWindow> 
+                >
+                    <agm-info-window #infoWindow>
                         <a (click)="redrect(marker)">{{ marker.nom }}</a>
                   </agm-info-window>
           </agm-marker>
-          
+
           </div>
       </agm-map>
-    
-  </div>
+

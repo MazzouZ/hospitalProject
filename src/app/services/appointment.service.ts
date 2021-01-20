@@ -17,8 +17,13 @@ export class AppointmentService {
   addAppointment(appointment){
      return this.http.post(this.url, appointment);
   }
-  addEtabToApp(etab,appointmentLink){
-    return this.http.put(etab._links.etablissement.href,appointmentLink,
+  addEtabToApp(appointment,etabLink){
+    return this.http.put(appointment._links.etablissement.href,etabLink,
       {headers: new HttpHeaders({'Content-Type': 'text/uri-list'})})
   }
+  getAppointmentsOfEtab(etablissement){
+    return this.http.get(etablissement._links.appointments.href);
+  }
+
+
 }
